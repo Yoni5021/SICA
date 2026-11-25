@@ -44,7 +44,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 ## Current reconstruction status
 - [x] Set the app display name and primary navigation branding to SICA EXTERNAL.
 - [x] Apply the SICA red/black visual accent system.
-- [x] Point the in-app GitHub link and attribution metadata to the SICA fork.
+- [x] Point the in-app GitHub link, release-update checker, and attribution metadata to the SICA fork (update offers will remain empty until the fork publishes a release).
 - [x] Update English, Vietnamese, and Simplified Chinese product-name strings while retaining the `.3105` package extension and format identifiers.
 - [x] Add Spanish as an app language, register its strings in the Xcode project, and fall back to English for untranslated keys.
 - [x] Translate all current English localization keys into Spanish, including dashboard, file browser, patch manager, repository, wallpaper, Gestalt, and system status; key parity audit passes with 654 keys and no duplicates.
@@ -55,7 +55,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
 - [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).\n- [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
 - [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
-- [ ] Build, test, and sign with Xcode on macOS.
+- [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
 1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Review accidental-delete protection in the patch library. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
