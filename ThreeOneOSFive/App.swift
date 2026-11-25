@@ -10,14 +10,13 @@ struct ThreeOneOSFiveApp: App {
     @StateObject private var repositoryStore = PackageRepositoryStore()
     @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.english.rawValue
     @State private var showOnboarding = OnboardingStore.shouldShow()
-    @State private var showAttribution = false
     @State private var updateOffer: AppUpdateChecker.Offer?
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init() {
         setupLogCapture()
-        log("app: 3105 launching — iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
+        log("app: SICA EXTERNAL launching — iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
     }
 
     private var language: AppLanguage {
@@ -64,10 +63,6 @@ struct ThreeOneOSFiveApp: App {
                     .zIndex(1)
                 }
             }
-            .displayIdentityAttribution(isPresented: $showAttribution, enabled: !showOnboarding)
-            .sheet(isPresented: $showAttribution) {
-                DisplayAttributionSheet()
-            }
             .alert(item: $updateOffer) { offer in
                 Alert(
                     title: Text(language.text("update.title")),
@@ -101,8 +96,6 @@ class AppState: ObservableObject {
     @Published var exploitStatus: ExploitStatus = .notStarted
     @Published var unsupportedMessage: String?
     @Published var kernelExploitRunning = false
-
-    private var autoRunAttempted = false
 
     var kernelExploitApplicable: Bool {
         KernelExploit.isApplicable(
@@ -144,17 +137,6 @@ class AppState: ObservableObject {
         guard applicable else { return }
 
         refreshKernelExploitStatus()
-        maybeAutoRunKernelExploit()
-    }
-
-    private func maybeAutoRunKernelExploit() {
-        guard !kernelExploitRunning,
-              !exploitStatus.isSuccess,
-              !exploitStatus.isFailed,
-              !autoRunAttempted else { return }
-        autoRunAttempted = true
-        log("app: starting kernel exploit automatically")
-        runKernelExploitIfNeeded()
     }
 
     private func refreshKernelExploitStatus() {

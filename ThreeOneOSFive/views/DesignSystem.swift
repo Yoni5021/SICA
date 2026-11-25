@@ -1,11 +1,12 @@
 import SwiftUI
 
 enum AppTheme {
+    // SICA EXTERNAL visual identity: restrained signal red with neutral system surfaces.
     static let accent = Color(
         uiColor: UIColor { traits in
             traits.userInterfaceStyle == .dark
-                ? UIColor(red: 1.00, green: 0.64, blue: 0.42, alpha: 1.00)
-                : UIColor(red: 0.85, green: 0.42, blue: 0.20, alpha: 1.00)
+                ? UIColor(red: 1.00, green: 0.24, blue: 0.28, alpha: 1.00)
+                : UIColor(red: 0.78, green: 0.08, blue: 0.13, alpha: 1.00)
         }
     )
     static let pageBackground = Color(uiColor: .systemBackground)
