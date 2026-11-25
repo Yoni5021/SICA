@@ -37,6 +37,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Apply the SICA red/black visual accent system.
 - [x] Point the in-app GitHub link and attribution metadata to the SICA fork.
 - [x] Update English, Vietnamese, and Simplified Chinese product-name strings while retaining the `.3105` package extension and format identifiers.
+- [x] Add Spanish as an app language, register its strings in the Xcode project, and fall back to English for untranslated keys.
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
 - [ ] Replace the binary app icon and remaining original visual assets.
