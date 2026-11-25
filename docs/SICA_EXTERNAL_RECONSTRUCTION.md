@@ -42,7 +42,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - These are source-level findings only; no Xcode build or real-device test has been performed.
 
 ## Current reconstruction status
-- [x] Set the app display name and primary navigation branding to SICA EXTERNAL.
+- [x] Set the app display name and primary navigation branding to SICA EXTERNAL, including both Debug and Release generated-Info.plist build overrides.
 - [x] Apply the SICA red/black visual accent system.
 - [x] Point the in-app GitHub link, release-update checker, and attribution metadata to the SICA fork (update offers will remain empty until the fork publishes a release).
 - [x] Update English, Vietnamese, and Simplified Chinese product-name strings while retaining the `.3105` package extension and format identifiers.
@@ -60,7 +60,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
-1. Replace the binary home-screen app icon and remaining IPA visual assets; preserve upstream license notices. The in-app brand mark is complete, and the source-wide hidden-attribution audit and visible-branding cleanup are complete.
+1. Replace the binary home-screen app icon and remaining IPA visual assets; preserve upstream license notices. The in-app brand mark and source-wide hidden-attribution audit are complete; both Debug and Release build configurations now override the generated display name with SICA EXTERNAL.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt remaining available localizations; Spanish key parity is complete.
