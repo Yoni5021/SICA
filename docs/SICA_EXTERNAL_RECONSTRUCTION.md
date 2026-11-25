@@ -34,7 +34,8 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 
 ## Utility behavior verified in source (not device-tested)
 - Cleaner is intentionally scoped to each app container's `Library/Caches` and `tmp`; it validates the container root before scanning/removing contents. It is not a general-purpose system cleaner.
-- Wallpaper Lab checks MHA-C2 container write access before installation, creates backups, and requires an explicit confirmation before applying a package. Actual installation depends on device permissions and supported iOS state.
+- Wallpaper Lab checks MHA-C2 container write access before installation and requires explicit confirmation before applying a package. Installation stages each descriptor, validates its file count/size, records a receipt, and rolls back newly installed descriptors if the transaction fails. The receipt tracks prior descriptor names; do not describe it as a full content backup without verifying the backup implementation. Actual installation depends on device permissions and supported iOS state.
+- Wallpaper reset removes descriptors identified as custom and updates/removes matching install receipts. Treat reset as destructive and retain a separate device backup before using it.
 - Patch Projects includes a separate optional package-unlock flow for protected project entries. This is not the startup access-key screen and remains intact.
 - Protected patch packages use an authenticated AES-GCM envelope; password-based key wrapping uses PBKDF2-HMAC-SHA-256 with bounded iteration settings. The codec validates package structure and replacement-file digests. This protects the package format; it does not validate whether a patch is safe or compatible with a target app.
 - Cleaner traversal uses descriptor-relative filesystem operations and `O_NOFOLLOW`; it does not intentionally follow symbolic links or remove sockets/device nodes. Its allowlist remains `Library/Caches` and `tmp` only.
