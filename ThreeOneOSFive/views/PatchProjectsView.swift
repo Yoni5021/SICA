@@ -278,7 +278,7 @@ struct PatchProjectsView: View {
                 } else {
                     Text(language.text(
                         "browser.delete_multiple_message",
-                        pendingPatchDeletions.count
+                        Int64(pendingPatchDeletions.count)
                     ))
                 }
             }
