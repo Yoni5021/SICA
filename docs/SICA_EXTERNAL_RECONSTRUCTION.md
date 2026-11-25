@@ -50,7 +50,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Translate all current English localization keys into Spanish, including dashboard, file browser, patch manager, repository, wallpaper, Gestalt, and system status; key parity audit passes with 654 keys and no duplicates.
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
-- [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
+- [ ] Integrate the approved SICA EXTERNAL anime icon artwork into the iOS asset catalog. The male anime character / red-black crown concept has been generated and approved, but its image file is not yet committed to the repository; the original IPA background, avatar, and click sound are also not yet imported.
 - [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, onboarding welcome copy, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
 - [x] Replace the in-app `AppLogo` rendering with a native SICA red-on-dark brand mark; the binary home-screen app icon is still pending.
 - [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
@@ -60,7 +60,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
-1. Replace the binary home-screen app icon and remaining IPA visual assets; preserve upstream license notices. The in-app brand mark and source-wide hidden-attribution audit are complete; both Debug and Release build configurations now override the generated display name with SICA EXTERNAL.
+1. Integrate the approved male-anime SICA EXTERNAL icon into the asset catalog and replace remaining IPA visual assets; preserve upstream license notices. The in-app brand mark and source-wide hidden-attribution audit are complete; both Debug and Release build configurations now override the generated display name with SICA EXTERNAL.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt remaining available localizations; Spanish key parity is complete.
