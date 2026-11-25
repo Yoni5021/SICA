@@ -26,6 +26,8 @@ struct PatchProjectsView: View {
     @State private var wallpaperPackages: [WallpaperStagedPackage] = []
     @State private var wallpaperImportFeedback: WallpaperImportFeedback?
     @State private var wallpaperPendingDeletion: WallpaperStagedPackage?
+    @State private var pendingPatchDeletions: [PatchLibraryItem] = []
+    @State private var showPatchDeletionConfirmation = false
     @State private var isImportingWallpapers = false
     @State private var showSimulatedWallpaperDetail = false
     @State private var simulatedWallpaperDetailGate = OneShotPresentationGate()
@@ -113,7 +115,8 @@ struct PatchProjectsView: View {
                                     itemRow(item)
                                 }
                                 .onDelete { offsets in
-                                    offsets.map { filteredItems[$0] }.forEach(store.delete)
+                                    pendingPatchDeletions = offsets.map { filteredItems[$0] }
+                                    showPatchDeletionConfirmation = !pendingPatchDeletions.isEmpty
                                 }
                             }
                         }
@@ -253,6 +256,31 @@ struct PatchProjectsView: View {
                     message: Text(feedback.message),
                     dismissButton: .default(Text(language.text("common.ok")))
                 )
+            }
+            .confirmationDialog(
+                language.text("browser.delete_title"),
+                isPresented: $showPatchDeletionConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button(language.text("common.delete"), role: .destructive) {
+                    pendingPatchDeletions.forEach(store.delete)
+                    pendingPatchDeletions = []
+                }
+                Button(language.text("common.cancel"), role: .cancel) {
+                    pendingPatchDeletions = []
+                }
+            } message: {
+                if pendingPatchDeletions.count == 1, let item = pendingPatchDeletions.first {
+                    Text(language.text(
+                        "browser.delete_message",
+                        item.packageURL.lastPathComponent
+                    ))
+                } else {
+                    Text(language.text(
+                        "browser.delete_multiple_message",
+                        pendingPatchDeletions.count
+                    ))
+                }
             }
             .alert(item: $wallpaperPendingDeletion) { package in
                 Alert(
