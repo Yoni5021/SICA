@@ -36,7 +36,9 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - Cleaner is intentionally scoped to each app container's `Library/Caches` and `tmp`; it validates the container root before scanning/removing contents. It is not a general-purpose system cleaner.
 - Wallpaper Lab checks MHA-C2 container write access before installation, creates backups, and requires an explicit confirmation before applying a package. Actual installation depends on device permissions and supported iOS state.
 - Patch Projects includes a separate optional package-unlock flow for protected project entries. This is not the startup access-key screen and remains intact.
-- File browser supports multiple tabs and app-container navigation; actual visibility/access depends on MHA-C2 and iOS permissions.
+- File browser supports multiple tabs, app-container navigation, search/sorting, import/export, copy/move/archive, and multi-select deletion. Destructive file deletion and import/transfer replacement conflicts use confirmation dialogs; actual visibility/access depends on MHA-C2 and iOS permissions.
+- Patch library deletion currently has an immediate list swipe-delete path (without a separate confirmation in `PatchProjectsView`); review this before treating package deletion as protected against accidental taps. Wallpaper-package deletion does show a confirmation alert.
+- The hidden attribution helper is not attached in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, and `AppDataBrowserView.swift`). This is not yet a complete project-wide call-site audit.
 - These are source-level findings only; no Xcode build or real-device test has been performed.
 
 ## Current reconstruction status
@@ -49,12 +51,12 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
 - [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
-- [ ] Audit and verify all remaining attribution/hidden-gesture wiring. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in `App.swift` or `ContentView.swift`, but the full project call-site audit is still pending.
+- [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
 - [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).\n- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
 - [ ] Build, test, and sign with Xcode on macOS.
 
 ## Implementation order
-1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
+1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Review accidental-delete protection in the patch library. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt Spanish strings and remaining available localizations.
