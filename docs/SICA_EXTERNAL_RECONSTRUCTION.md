@@ -62,14 +62,15 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).
 - [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
 - [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
-- [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
+- [ ] Run the new GitHub Actions workflow on `macos-latest` and resolve any Xcode build failures. `.github/workflows/ios-build.yml` creates an unsigned device archive and an unsigned IPA container for inspection; neither is installable until Apple code signing is configured.
+- [ ] Configure signing secrets and a matching provisioning profile, then export a signed IPA. The workflow intentionally does not request or store Apple credentials yet. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
 1. Integrate the approved male-anime SICA EXTERNAL icon into the asset catalog and replace remaining IPA visual assets; preserve upstream license notices. The in-app brand mark and source-wide hidden-attribution audit are complete; both Debug and Release build configurations now override the generated display name with SICA EXTERNAL.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt remaining available localizations; Spanish key parity is complete.
-5. Test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations.
+5. Run the GitHub Actions build, then test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations. For a signed IPA, configure the Apple certificate (`.p12`), certificate password, provisioning profile (`.mobileprovision`), and temporary keychain password as GitHub Actions secrets; never place these files in the repository.
 
 ## Safety, compatibility, licensing
 - Device-level features depend on iOS build support and device permissions. Simulator success does not prove device-level access.
