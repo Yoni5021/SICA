@@ -84,7 +84,6 @@
 "settings.supported_versions_footer" = "La compatibilidad depende de la versión exacta de iOS y del dispositivo.";
 "settings.social_media" = "Redes y proyecto";
 "settings.credits" = "Créditos";
-"settings.current_version" = "Versión actual";
 "common.search" = "Buscar";
 
 "dashboard.unsupported_footer" = "iOS %@ (%@) está fuera del rango verificado. Compatible con iOS 17.0–17.7.x, iOS 18.0–18.7.1, iOS 26.0–26.6.1 e iOS 27.0 Developer Beta 1–4 y Public Beta 1–2.";
