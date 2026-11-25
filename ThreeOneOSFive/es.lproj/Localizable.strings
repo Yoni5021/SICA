@@ -648,3 +648,14 @@
 "gestalt.applied_title" = "¡Listo!";
 "gestalt.applied_message" = "Se aplicaron %lld bytes.";
 "gestalt.restored_message" = "Se restauró el original. Pulsa REINICIAR.";
+
+"tab.patches" = "Paquetes";
+"tab.explore" = "Explorar";
+"kernel.section_title" = "Acceso avanzado del sistema";
+"kernel.run_exploit" = "Solicitar acceso del sistema";
+"kernel.exploit_running" = "Solicitando acceso…";
+"kernel.exploit_success" = "Acceso al entorno aislado verificado";
+"kernel.exploit_failed" = "No se pudo obtener acceso al sistema";
+"kernel.footer_warning" = "Solo en memoria; no es persistente. Si falla, vuelve a abrir la app antes de intentarlo otra vez.";
+"kernel.auto_run" = "Iniciar automáticamente al abrir";
+"kernel.failed_requires_relaunch" = "Vuelve a abrir la app antes de intentarlo de nuevo.";
