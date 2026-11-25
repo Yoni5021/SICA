@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="docs/images/app-icon.png" width="132" alt="3105 app icon">
+  <img src="docs/images/app-icon.png" width="132" alt="SICA EXTERNAL app icon">
 </p>
 
-<h1 align="center">3105</h1>
+<h1 align="center">SICA EXTERNAL</h1>
 
 <p align="center">
-  An iOS content hub and manager for patches, app data, dialer themes, and PosterBoard wallpapers.
+  An iOS content hub and manager for app data, supported packages, themes, and wallpapers.
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 </p>
 
 > [!WARNING]
-> 3105 is research software for personal device management. Keep a backup and use it only on devices and data you own. Simulator screenshots demonstrate UI only; they do not verify device-level access.
+> SICA EXTERNAL is a community-branded fork of 3105 for personal device management. Keep a backup and use it only on devices and data you own. Simulator screenshots demonstrate UI only; they do not verify device-level access.
 
 ## Preview
 
@@ -75,7 +75,7 @@ Compared with 1.1.1, version 2.0 turns 3105 from a collection of separate tools 
 | iOS 27 Developer Beta 3 / Public Beta 1 | `24A5380h` |
 | iOS 27 Developer Beta 4 / Public Beta 2 | `24A5390f` |
 
-Unlisted iOS 27 builds are marked unsupported rather than assumed compatible. The iOS 17–18 kernel exploit is opt-in (manual button) because a failed exploit attempt may restart the app.
+Unlisted iOS 27 builds are marked unsupported rather than assumed compatible. Kernel-exploit execution is not started automatically when the app launches. Any device-level operation must be explicitly initiated by the user; a failed attempt may restart the app.
 
 ## Installation notes
 
