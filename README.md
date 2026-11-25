@@ -59,7 +59,7 @@ Compared with 1.1.1, version 2.0 turns SICA EXTERNAL from a collection of separa
 - **Portable `.3105` patches** — target multiple apps or App Groups, expose user choices, use optional passwords, and restore original files after use.
 - **Additional packages** — install `.3105pass` dialer themes, `.tendies` wallpapers, and built-in SICA EXTERNAL features.
 - **No jailbreak installation** — SICA EXTERNAL does not install a persistent jailbreak, bootstrap, or daemon and does not inject code into third-party apps. Because it still uses device exploits and can modify app data, no universal guarantee can be made against every app's integrity or jailbreak-detection policy.
-- **Localized interface** — English, Vietnamese, and Simplified Chinese.
+- **Localized interface** — English, Spanish, Vietnamese, and Simplified Chinese.
 
 ## Compatibility
 
