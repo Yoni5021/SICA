@@ -52,6 +52,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
 - [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
 - [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
+- [x] Replace the in-app `AppLogo` rendering with a native SICA red-on-dark brand mark; the binary home-screen app icon is still pending.
 - [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
 - [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).
 - [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
@@ -59,7 +60,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
-1. Replace SICA EXTERNAL visual assets; preserve upstream license notices. The source-wide hidden-attribution audit and visible-branding cleanup are complete.
+1. Replace the binary home-screen app icon and remaining IPA visual assets; preserve upstream license notices. The in-app brand mark is complete, and the source-wide hidden-attribution audit and visible-branding cleanup are complete.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt remaining available localizations; Spanish key parity is complete.
