@@ -51,7 +51,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
 - [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
-- [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
+- [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, onboarding welcome copy, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
 - [x] Replace the in-app `AppLogo` rendering with a native SICA red-on-dark brand mark; the binary home-screen app icon is still pending.
 - [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
 - [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).
