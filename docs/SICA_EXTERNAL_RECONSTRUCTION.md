@@ -53,15 +53,16 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
 - [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
 - [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
-- [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).\n- [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
+- [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).
+- [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
 - [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
 - [ ] Build, test, and sign with Xcode on macOS. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
-1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Review accidental-delete protection in the patch library. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
+1. Replace SICA EXTERNAL visual assets; preserve upstream license notices. The source-wide hidden-attribution audit and visible-branding cleanup are complete.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
-4. Adapt Spanish strings and remaining available localizations.
+4. Adapt remaining available localizations; Spanish key parity is complete.
 5. Test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations.
 
 ## Safety, compatibility, licensing
