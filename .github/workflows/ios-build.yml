@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: sica-ios-\${{ github.ref }}
+  group: sica-ios-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -56,8 +56,8 @@ jobs:
         with:
           name: sica-external-ios-unsigned-build
           path: |
-            \${{ runner.temp }}/SICA-EXTERNAL.xcarchive
-            \${{ runner.temp }}/SICA-EXTERNAL-unsigned.ipa
-            \${{ runner.temp }}/xcodebuild-archive.log
+            ${{ runner.temp }}/SICA-EXTERNAL.xcarchive
+            ${{ runner.temp }}/SICA-EXTERNAL-unsigned.ipa
+            ${{ runner.temp }}/xcodebuild-archive.log
           if-no-files-found: warn
           retention-days: 14
