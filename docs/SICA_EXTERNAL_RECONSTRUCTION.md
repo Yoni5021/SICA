@@ -34,31 +34,43 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 
 ## Utility behavior verified in source (not device-tested)
 - Cleaner is intentionally scoped to each app container's `Library/Caches` and `tmp`; it validates the container root before scanning/removing contents. It is not a general-purpose system cleaner.
-- Wallpaper Lab checks MHA-C2 container write access before installation, creates backups, and requires an explicit confirmation before applying a package. Actual installation depends on device permissions and supported iOS state.
+- Wallpaper Lab checks MHA-C2 container write access before installation and requires explicit confirmation before applying a package. Installation stages each descriptor, validates its file count/size, records a receipt, and rolls back newly installed descriptors if the transaction fails. The receipt tracks prior descriptor names; do not describe it as a full content backup without verifying the backup implementation. Actual installation depends on device permissions and supported iOS state.
+- Wallpaper reset removes descriptors identified as custom and updates/removes matching install receipts. Treat reset as destructive and retain a separate device backup before using it.
 - Patch Projects includes a separate optional package-unlock flow for protected project entries. This is not the startup access-key screen and remains intact.
-- File browser supports multiple tabs and app-container navigation; actual visibility/access depends on MHA-C2 and iOS permissions.
+- Protected patch packages use an authenticated AES-GCM envelope; password-based key wrapping uses PBKDF2-HMAC-SHA-256 with bounded iteration settings. The codec validates package structure and replacement-file digests. This protects the package format; it does not validate whether a patch is safe or compatible with a target app.
+- Cleaner traversal uses descriptor-relative filesystem operations and `O_NOFOLLOW`; it does not intentionally follow symbolic links or remove sockets/device nodes. Its allowlist remains `Library/Caches` and `tmp` only.
+- File browser supports multiple tabs, app-container navigation, search/sorting, import/export, copy/move/archive, and multi-select deletion. Destructive file deletion and import/transfer replacement conflicts use confirmation dialogs; actual visibility/access depends on MHA-C2 and iOS permissions.
+- ZIP extraction rejects absolute paths, `..`/`.` components, backslashes, control characters, duplicate normalized paths, symbolic links, unsupported entry types, encrypted entries, and unsupported compression methods. It enforces archive/entry/count/expanded-size limits, writes files exclusively without following symlinks, and verifies output size plus CRC before accepting each file.
+- The file-browser ZIP extractor (`ZIPArchiveExtractor`) is separate from the wallpaper/package extractor. It now caps archives at 512 MiB, entries at 2,000, each expanded file at 512 MiB, and total expanded output at 2 GiB; it also checks available disk space, path traversal, entry types, encryption flags, local-vs-central filenames, and CRC/output integrity. These are source-level safeguards and still require Xcode/device testing.
+- Patch library deletion now presents a destructive confirmation before removing one or multiple selected packages. Wallpaper-package deletion also presents a confirmation alert.
+- A source-wide audit of all Swift files found no call site for `displayIdentityAttribution` or `DisplayAttributionSheet`; the five-second hidden-gesture helper remains present but unattached. Separate display-identity attestation code remains in `Utils.swift` and has not been altered.
 - These are source-level findings only; no Xcode build or real-device test has been performed.
 
 ## Current reconstruction status
-- [x] Set the app display name and primary navigation branding to SICA EXTERNAL.
+- [x] Set the app display name and primary navigation branding to SICA EXTERNAL, including both Debug and Release generated-Info.plist build overrides.
 - [x] Apply the SICA red/black visual accent system.
-- [x] Point the in-app GitHub link and attribution metadata to the SICA fork.
+- [x] Point the in-app GitHub link, release-update checker, and attribution metadata to the SICA fork (update offers will remain empty until the fork publishes a release).
 - [x] Update English, Vietnamese, and Simplified Chinese product-name strings while retaining the `.3105` package extension and format identifiers.
 - [x] Add Spanish as an app language, register its strings in the Xcode project, and fall back to English for untranslated keys.
 - [x] Translate all current English localization keys into Spanish, including dashboard, file browser, patch manager, repository, wallpaper, Gestalt, and system status; key parity audit passes with 654 keys and no duplicates.
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
-- [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
-- [ ] Audit and verify all remaining attribution/hidden-gesture wiring. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in `App.swift` or `ContentView.swift`, but the full project call-site audit is still pending.
-- [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).\n- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
-- [ ] Build, test, and sign with Xcode on macOS.
+- [ ] Integrate the approved SICA EXTERNAL anime icon artwork into the iOS asset catalog. The male anime character / red-black crown concept has been generated and approved, but its image file is not yet committed to the repository; the original IPA background, avatar, and click sound are also not yet imported.
+- [x] Finish visible SICA EXTERNAL labels in the log export, repository-source fallback labels, onboarding welcome copy, and log prefix; retain `3105` where it is a package extension, temporary-file prefix, or compatibility identifier.
+- [x] Replace the in-app `AppLogo` rendering with a native SICA red-on-dark brand mark; the binary home-screen app icon is still pending.
+- [ ] Finish the project-wide attribution/hidden-gesture call-site audit. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in the inspected app roots (`App.swift`, `ContentView.swift`, `RepositoryHomeView.swift`, `AppDataBrowserView.swift`, `SettingsView.swift`, or `OnboardingView.swift`).
+- [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).
+- [x] Add a destructive confirmation before patch-library package deletion, including multi-selection; reuse existing localized browser deletion prompts.
+- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
+- [ ] Run the new GitHub Actions workflow on `macos-latest` and resolve any Xcode build failures. `.github/workflows/ios-build.yml` creates an unsigned device archive and an unsigned IPA container for inspection; neither is installable until Apple code signing is configured.
+- [ ] Configure signing secrets and a matching provisioning profile, then export a signed IPA. The workflow intentionally does not request or store Apple credentials yet. The repository currently has no automated test target or published SICA release.
 
 ## Implementation order
-1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
+1. Integrate the approved male-anime SICA EXTERNAL icon into the asset catalog and replace remaining IPA visual assets; preserve upstream license notices. The in-app brand mark and source-wide hidden-attribution audit are complete; both Debug and Release build configurations now override the generated display name with SICA EXTERNAL.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
-4. Adapt Spanish strings and remaining available localizations.
-5. Test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations.
+4. Adapt remaining available localizations; Spanish key parity is complete.
+5. Run the GitHub Actions build, then test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations. For a signed IPA, configure the Apple certificate (`.p12`), certificate password, provisioning profile (`.mobileprovision`), and temporary keychain password as GitHub Actions secrets; never place these files in the repository.
 
 ## Safety, compatibility, licensing
 - Device-level features depend on iOS build support and device permissions. Simulator success does not prove device-level access.

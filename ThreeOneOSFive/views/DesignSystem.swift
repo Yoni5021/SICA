@@ -104,23 +104,28 @@ struct AppLogo: View {
     var size: CGFloat = 44
 
     var body: some View {
-        Group {
-            if let icon = UIImage(named: "AppIcon60x60")
-                ?? Bundle.main.path(forResource: "AppIcon60x60@2x", ofType: "png").flatMap(UIImage.init(contentsOfFile:))
-                ?? UIImage(named: "AppIcon") {
-                Image(uiImage: icon)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Image(systemName: "slider.horizontal.3")
-                    .font(.title2.weight(.semibold))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(AppTheme.accent)
-            }
+        ZStack {
+            RoundedRectangle(cornerRadius: size * 0.22, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.10, green: 0.035, blue: 0.045),
+                            Color(red: 0.025, green: 0.025, blue: 0.035)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            Circle()
+                .stroke(AppTheme.accent.opacity(0.55), lineWidth: max(1, size * 0.035))
+                .padding(size * 0.12)
+            Text("S")
+                .font(.system(size: size * 0.68, weight: .black, design: .rounded))
+                .foregroundStyle(AppTheme.accent)
+                .offset(y: -size * 0.015)
         }
         .frame(width: size, height: size)
         .clipShape(RoundedRectangle(cornerRadius: size * 0.22, style: .continuous))
-        .accessibilityHidden(true)
+        .accessibilityLabel("SICA EXTERNAL")
     }
 }

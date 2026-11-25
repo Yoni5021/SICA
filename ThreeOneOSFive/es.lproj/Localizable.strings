@@ -29,7 +29,7 @@
 "onboarding.language_subtitle" = "Puedes cambiarlo después en Ajustes.";
 "onboarding.language_hint" = "Seleccionado: %@";
 "onboarding.welcome_title" = "Bienvenido a SICA EXTERNAL";
-"onboarding.welcome_message" = "Desarrollado por YangJiii";
+"onboarding.welcome_message" = "Te damos la bienvenida a SICA EXTERNAL";
 "onboarding.welcome_badge" = "SICA EXTERNAL";
 "onboarding.versions_title" = "Versiones de iOS compatibles";
 "onboarding.versions_subtitle" = "La compatibilidad está verificada en las versiones indicadas. Las versiones no compatibles se bloquean.";

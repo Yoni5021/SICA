@@ -147,7 +147,7 @@ private struct RepositorySourceRow: View {
                 repository: store.repository(for: source.id),
                 fallbackText: store.repository(for: source.id)?.name
                     ?? source.manifestURL.host
-                    ?? "3105"
+                    ?? "SICA EXTERNAL"
             )
             Text(
                 store.repository(for: source.id)?.name
