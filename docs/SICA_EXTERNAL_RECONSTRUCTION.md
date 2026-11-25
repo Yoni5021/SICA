@@ -41,13 +41,13 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Translate all current English localization keys into Spanish, including dashboard, file browser, patch manager, repository, wallpaper, Gestalt, and system status; key parity audit passes with 654 keys and no duplicates.
 - [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
-- [ ] Replace the binary app icon and remaining original visual assets.
-- [ ] Audit and verify all remaining attribution/hidden-gesture wiring.
+- [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
+- [ ] Audit and verify all remaining attribution/hidden-gesture wiring. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in `App.swift` or `ContentView.swift`, but the full project call-site audit is still pending.
 - [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
 - [ ] Build, test, and sign with Xcode on macOS.
 
 ## Implementation order
-1. Complete SICA EXTERNAL branding and visual assets; preserve upstream license notices.
+1. Finish a source-wide audit of hidden attribution wiring and remaining user-visible legacy branding. Then replace SICA EXTERNAL visual assets; preserve upstream license notices.
 2. Keep startup free of an access-key gate.
 3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
 4. Adapt Spanish strings and remaining available localizations.
