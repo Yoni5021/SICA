@@ -32,6 +32,13 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 | Settings/language/logs | `views/SettingsView.swift`, `LogView.swift`, `helpers/Localization.swift` |
 | Visual system | `views/DesignSystem.swift` |
 
+## Utility behavior verified in source (not device-tested)
+- Cleaner is intentionally scoped to each app container's `Library/Caches` and `tmp`; it validates the container root before scanning/removing contents. It is not a general-purpose system cleaner.
+- Wallpaper Lab checks MHA-C2 container write access before installation, creates backups, and requires an explicit confirmation before applying a package. Actual installation depends on device permissions and supported iOS state.
+- Patch Projects includes a separate optional package-unlock flow for protected project entries. This is not the startup access-key screen and remains intact.
+- File browser supports multiple tabs and app-container navigation; actual visibility/access depends on MHA-C2 and iOS permissions.
+- These are source-level findings only; no Xcode build or real-device test has been performed.
+
 ## Current reconstruction status
 - [x] Set the app display name and primary navigation branding to SICA EXTERNAL.
 - [x] Apply the SICA red/black visual accent system.
@@ -43,7 +50,7 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 - [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
 - [ ] Replace the binary app icon and remaining original visual assets. The current asset catalog still contains the inherited icon; the original IPA's red/black background, avatar, and click sound have not yet been imported.
 - [ ] Audit and verify all remaining attribution/hidden-gesture wiring. The helper `DisplayIdentityAttribution.swift` contains a window-wide 5-second long-press that opens an attribution sheet; no attachment was found in `App.swift` or `ContentView.swift`, but the full project call-site audit is still pending.
-- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
+- [x] Document source-level behavior and safety boundaries for Cleaner, Wallpaper Lab, protected patch projects, and file-browser tabs (not device-tested).\n- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
 - [ ] Build, test, and sign with Xcode on macOS.
 
 ## Implementation order
