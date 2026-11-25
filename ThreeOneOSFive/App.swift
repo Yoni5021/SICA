@@ -97,8 +97,6 @@ class AppState: ObservableObject {
     @Published var unsupportedMessage: String?
     @Published var kernelExploitRunning = false
 
-    private var autoRunAttempted = false
-
     var kernelExploitApplicable: Bool {
         KernelExploit.isApplicable(
             major: AppInfo.versionTuple.major,
@@ -139,17 +137,6 @@ class AppState: ObservableObject {
         guard applicable else { return }
 
         refreshKernelExploitStatus()
-        maybeAutoRunKernelExploit()
-    }
-
-    private func maybeAutoRunKernelExploit() {
-        guard !kernelExploitRunning,
-              !exploitStatus.isSuccess,
-              !exploitStatus.isFailed,
-              !autoRunAttempted else { return }
-        autoRunAttempted = true
-        log("app: starting kernel exploit automatically")
-        runKernelExploitIfNeeded()
     }
 
     private func refreshKernelExploitStatus() {
