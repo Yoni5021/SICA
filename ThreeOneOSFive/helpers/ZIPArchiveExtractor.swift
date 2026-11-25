@@ -39,6 +39,10 @@ enum ZIPArchiveExtractor {
     private static let centralHeaderSignature: UInt32 = 0x0201_4b50
     private static let endSignature: UInt32 = 0x0605_4b50
     private static let diskReserveBytes: Int64 = 64 * 1_024 * 1_024
+    private static let maximumArchiveBytes: UInt64 = 512 * 1_024 * 1_024
+    private static let maximumEntryCount: UInt16 = 2_000
+    private static let maximumExpandedBytes: UInt64 = 2 * 1_024 * 1_024 * 1_024
+    private static let maximumEntryBytes: UInt64 = 512 * 1_024 * 1_024
 
     static func extract(
         archiveURL: URL,
@@ -54,7 +58,7 @@ enum ZIPArchiveExtractor {
               archiveValues.isDirectory != true,
               archiveValues.isSymbolicLink != true,
               let archiveSizeValue = archiveValues.fileSize,
-              archiveSizeValue >= 22 else {
+              archiveSizeValue >= 22,\n              UInt64(archiveSizeValue) <= maximumArchiveBytes else {
             throw ZIPArchiveExtractorError.invalidArchive
         }
         let directoryValues = try destinationDirectory.resourceValues(
@@ -71,7 +75,7 @@ enum ZIPArchiveExtractor {
         var expandedBytes: UInt64 = 0
         for entry in entries {
             let (sum, overflow) = expandedBytes.addingReportingOverflow(entry.uncompressedSize)
-            guard !overflow, sum <= UInt64(Int64.max) else {
+            guard !overflow,\n                  sum <= maximumExpandedBytes,\n                  entry.uncompressedSize <= maximumEntryBytes,\n                  sum <= UInt64(Int64.max) else {
                 throw ZIPArchiveExtractorError.invalidArchive
             }
             expandedBytes = sum
