@@ -32,11 +32,23 @@ The IPA contains a compiled SwiftUI executable, not original Swift source. Exact
 | Settings/language/logs | `views/SettingsView.swift`, `LogView.swift`, `helpers/Localization.swift` |
 | Visual system | `views/DesignSystem.swift` |
 
+## Current reconstruction status
+- [x] Set the app display name and primary navigation branding to SICA EXTERNAL.
+- [x] Apply the SICA red/black visual accent system.
+- [x] Point the in-app GitHub link and attribution metadata to the SICA fork.
+- [x] Update English, Vietnamese, and Simplified Chinese product-name strings while retaining the `.3105` package extension and format identifiers.
+- [x] Disable automatic kernel-exploit invocation at launch; device-level exploit code remains in the upstream-derived project and has not been validated here.
+- [x] Keep the startup access-key gate out of the reconstruction; the optional patch-package key remains a separate feature.
+- [ ] Replace the binary app icon and remaining original visual assets.
+- [ ] Audit and verify all remaining attribution/hidden-gesture wiring.
+- [ ] Map only safe, verified utility features; do not import game aim-assist or cheat payloads.
+- [ ] Build, test, and sign with Xcode on macOS.
+
 ## Implementation order
-1. Apply SICA EXTERNAL branding and extracted visual assets; preserve upstream license notices.
+1. Complete SICA EXTERNAL branding and visual assets; preserve upstream license notices.
 2. Keep startup free of an access-key gate.
-3. Map the quick-patch labels and dashboard onto the existing patch architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
-4. Adapt Spanish strings and other available localizations.
+3. Map safe dashboard and utility features onto the existing architecture. Do not claim any patch works until its format, target paths, and behavior are verified.
+4. Adapt Spanish strings and remaining available localizations.
 5. Test navigation, file operations, package import/export, cleaner, and wallpaper flows on supported simulator/device configurations.
 
 ## Safety, compatibility, licensing
