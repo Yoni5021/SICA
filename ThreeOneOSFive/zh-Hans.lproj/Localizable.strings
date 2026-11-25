@@ -32,7 +32,7 @@
 "onboarding.language_subtitle" = "之后可在设置中更改。";
 "onboarding.language_hint" = "已选择：%@";
 "onboarding.welcome_title" = "欢迎使用 SICA EXTERNAL";
-"onboarding.welcome_message" = "由 YangJiii 开发";
+"onboarding.welcome_message" = "欢迎使用 SICA EXTERNAL";
 "onboarding.welcome_badge" = "官方 SICA EXTERNAL 标识";
 "onboarding.versions_title" = "支持的 iOS 版本";
 "onboarding.versions_subtitle" = "SICA EXTERNAL 已在下列范围内验证。不支持的版本会被阻止。";
